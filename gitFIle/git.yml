@@ -1,0 +1,107 @@
+## 本地仓库
+
+# 设置username和email
+$ git config --global user.name "Your Name"
+$ git config --global user.email "email@demo.com"
+
+# 创建版本库
+$ mkdir gitskill
+$ cd gitskill
+# git init 命令把这个目录变成Git可以管理的仓库
+$ git init
+# .git目录默认隐藏
+$ ls -ah # 可查看隐藏目录
+
+
+# 把文件添加到仓库
+$ git add file.txt
+# 把文件提交到仓库, -m后面输入的是本次提交的说明
+$ git commit -m "first commit"
+# 查看仓库当前状态
+$ git status
+# 提交日志查看
+$ git log --pretty=oneline
+$ git log --graph --pretty=oneline --abbrev-commit
+# 把当前版本回退到上个版本
+$ git reset --hard HEAD^
+# 指定回退版本
+$ git reset --hard 1095939  # 1095939是版本号前几位
+
+# 丢弃工作区修改 file.txt是具体文件,把文件的修改全部撤销
+# 自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+# 已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
+$ git checkout file.txt
+
+# 从版本库删除文件
+$ git rm file.txt
+$ git commit -m "删除文件"
+# 本地删除,版本库文件仍在,恢复本地误删
+$ git checkout --file.txt
+
+
+## 远程仓库
+
+## 本地Git仓库和GitHub仓库之间的传输是通过SSH加密的
+#1. 创建SSH Key,在用户主目录下,查看是否有.ssh目录,如果有,再看看这个目录
+#有没有id_rsa和id_rsa.pub这两个文件,如果已经有了,可直接跳到下一步,如果没有
+#,打开Shell(Windows打开Git Bash),创建SSH Key:
+
+$ ssh-keygen -t rsa -C "youremail@demo.com"
+
+#后面全部使用默认值,一路回车  id_rsa是私钥,id_rsa.pub是公钥,打开github 点击Add SSH Key
+#2.  在key的文本里粘贴id_rsa.pub文件的内容
+
+# 本地仓库关联远程仓库
+$ git remote add origin path
+
+# 本地库所有内容推送到远程库,实际上是把当前分支master推送到远程
+$ git push -u origin master
+# 本地master分支最新修改推送到GitHub上
+$ git push origin master
+
+## 从远程库克隆
+$ git clone path
+
+
+## 分支管理
+# 创建分支,然后切换分支
+$ git checkout -b dev
+# 查看当前分支
+$ git branch -r
+$ git branch -a
+
+# 合并分支, 将dev合并到master
+$ git checkout master
+$ git merge dev
+
+# 删除分支
+$ git branch -d dev
+# 丢弃一个没有被合并过的分支,强行删除
+$ git branch -D dev
+
+# 将工作现场储藏起来,等以后恢复现场继续工作
+$ git stash
+# 查看隐藏起来的工作现场
+$ git stash list
+# 恢复工作现场,并删除stash内容
+$ git stash pop
+
+# 查看远程库信息
+$ git remote -v
+
+# 推送本地分支
+$ git push origin dev
+# 创建远程分支到本地
+$ git checkout -b dev origin/dev
+# 删除远程分支
+$ git push origin --delete dev
+
+
+
+
+
+
+
+
+
+
