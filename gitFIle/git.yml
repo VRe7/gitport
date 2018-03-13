@@ -53,8 +53,10 @@ $ ssh-keygen -t rsa -C "youremail@demo.com"
 #后面全部使用默认值,一路回车  id_rsa是私钥,id_rsa.pub是公钥,打开github 点击Add SSH Key
 #2.  在key的文本里粘贴id_rsa.pub文件的内容
 
+# 将远程仓库地址修改为新的仓库地址
+$ git remote remove origin  # 先删除 后添加
 # 本地仓库关联远程仓库
-$ git remote add origin path
+$ git remote add origin path 
 
 # 本地库所有内容推送到远程库,实际上是把当前分支master推送到远程
 $ git push -u origin master
